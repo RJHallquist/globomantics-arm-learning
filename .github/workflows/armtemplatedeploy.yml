@@ -25,16 +25,23 @@ jobs:
           subscriptionId:  ca911895-5fd7-4efb-9266-551f6802f785
           region: westus2
           template: ./arm-templates/resourcegroup.json
+          parameters:
+            location=westus2
+            resourceGroupName=rg-githubactions
           deploymentName: rg-githubactions
 
       - name: Deploy Storage Account
         uses: Azure/arm-deploy@v1
+        id: storageAccountDeploy
         with:
           scope: resourcegroup
           resourceGroupName: rg-githubactions
           subscriptionId:  ca911895-5fd7-4efb-9266-551f6802f785
           template: ./arm-templates/storageaccount.json
-          parameters: 
-            ./arm-templates/storageaccount.parameters.json
+          parameters:
+            sku=Standard_LRS
             storageAccountName=globostg755
+            location=westus2
           deploymentMode: incremental
+
+      - run: echo ${{ steps.storageAccountDeploy.outputs.BlobUri }}
