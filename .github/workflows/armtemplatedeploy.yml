@@ -44,10 +44,13 @@ jobs:
             location=westus2
           deploymentMode: incremental
 
-      - name: Deploy DNS Zon
+      - name: Deploy Virtual machine
         uses: Azure/arm-deploy@v1
         with:
           scope: resourcegroup
           resourceGroupName: rg-githubactions
           subscriptionId:  ca911895-5fd7-4efb-9266-551f6802f785
-          template: ./arm-templates/dnszones.json
+          template: ./arm-templates/virtualmachine.json
+          parameters:
+            adminPassword="My$ecureP@ssword!"
+          deploymentMode: incremental
