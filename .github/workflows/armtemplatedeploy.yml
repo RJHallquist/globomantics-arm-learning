@@ -28,7 +28,7 @@ jobs:
         uses: Azure/arm-deploy@v1
         with:
           scope: subscription
-          subscriptionId:  ${{ env.subscriptionId }}
+          subscriptionId: ${{ env.subscriptionId }}
           region: "${{ env.location }}"
           template: ./arm-templates/resourcegroup.json
           parameters:
@@ -42,9 +42,9 @@ jobs:
         with:
           scope: resourcegroup
           resourceGroupName: ${{ env.resource_group_name }}
-          subscriptionId:  ${{ env.subscriptionId }}
+          subscriptionId: ${{ env.subscriptionId }}
           template: ./arm-templates/storageaccount.json
-          parameters:
+          parameters: 
             sku=Standard_LRS
             storageAccountName=globostg755
             location="${{ env.location }}"
@@ -55,9 +55,9 @@ jobs:
         with:
           scope: resourcegroup
           resourceGroupName: ${{ env.resource_group_name }}
-          subscriptionId:  ${{ env.subscriptionId }}
+          subscriptionId: ${{ env.subscriptionId }}
           template: ./arm-templates/virtualmachine.json
-          parameters:
+          parameters: 
             adminPassword=${{ secrets.UBUNTU_ADMIN_PASSWORD }}
             location="${{ env.location }}"
           deploymentMode: incremental
@@ -70,7 +70,7 @@ jobs:
       location:  East US 2
     environment:
       name: production
-
+      
     needs: armDeployStaging
 
     steps:
@@ -85,7 +85,7 @@ jobs:
         uses: Azure/arm-deploy@v1
         with:
           scope: subscription
-          subscriptionId:  ${{ env.subscriptionId }}
+          subscriptionId: ${{ env.subscriptionId }}
           region: "${{ env.location }}"
           template: ./arm-templates/resourcegroup.json
           parameters:
@@ -99,9 +99,9 @@ jobs:
         with:
           scope: resourcegroup
           resourceGroupName: ${{ env.resource_group_name }}
-          subscriptionId:  ${{ env.subscriptionId }}
+          subscriptionId: ${{ env.subscriptionId }}
           template: ./arm-templates/storageaccount.json
-          parameters:
+          parameters: 
             sku=Standard_LRS
             storageAccountName=globostg756
             location="${{ env.location }}"
@@ -112,9 +112,9 @@ jobs:
         with:
           scope: resourcegroup
           resourceGroupName: ${{ env.resource_group_name }}
-          subscriptionId:  ${{ env.subscriptionId }}
+          subscriptionId: ${{ env.subscriptionId }}
           template: ./arm-templates/virtualmachine.json
-          parameters:
+          parameters: 
             adminPassword=${{ secrets.UBUNTU_ADMIN_PASSWORD }}
             location="${{ env.location }}"
           deploymentMode: incremental
